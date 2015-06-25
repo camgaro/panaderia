@@ -1,68 +1,37 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Documento sin título</title>
+<title>Inventarios</title>
 </head>
 
 <body>
 </body>
 </html>
-
-<?php
-class conexion {
-	function cone(){
-	mysql_connect("localhost","root","123456");
-	mysql_select_db("panaderia");
-	}
-	}
-
-   
+<?php 
+require_once('conexion.php');
+function insertarfactura($id,$docu,$serial,$cant,$precio,$nombre,$fecha){
 	
-
-class factura{
-	function registrofactura() {
-		$id=$_POST['id'];
-		$docu=$_POST['docu'];
-		$serial=$_POST['serial'];
-		$cant=$_POST['cant'];
-		$precio=$_POST['pre'];
-		$nom=$_POST['nom'];
-		$fecha=$_POST['fecha'];
 		
-		$registro=mysql_query("insert into factura values('".$id."','".$docu."','".$serial."','".$cant."','".$precio."','".$nom."','".$fecha."')");
+		$base=new conexion();
+		$base->constructor("localhost","root","123456", "ejercicio");
+		$base->conectar();
+		$base->insertar ($id,$docu,$serial,$cant,$precio,$nombre,$fecha);
+		}
 		
-	echo '
-	<script type="text/javascript"> 
-echo "datos ingresados";
-window.open("factura.html","_self");
-
-</script>
+function inventario(){
 	
+		
+		$id=$_POST["id"];
+		$docu=$_POST["docu"];
+		$serial=$_POST["serial"];
+		$cant=$_POST["cant"];
+		$precio=$_POST["pre"];
+		$nombre=$_POST["nom"];
+		$fecha=$_POST["fecha"];
+		
+	insertarfactura ($id,$docu,$serial,$cant,$precio,$nombre,$fecha);
+		}
 	
+	inventario();
 	
-	
-	';
-	
-	
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	}// cierre factura
-	
-	$conexion = new conexion;
-	$cone-> cone();
-	$factura=new factura;
-	$registro-> registrofactura();
-	
-	
-
-
-
-
 ?>
