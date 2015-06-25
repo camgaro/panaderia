@@ -1,22 +1,24 @@
 <?php 
-   include("conexion.php");
-
-   function guardar($documento, $seri, $cant, $pre){
-   	  $conexionbase= new conexion("localhost","root","1234","prueba");
-   	  $conexionbase->conectar();
-   	  $conexionbase->insertar($documento, $seri, $cant, $pre);
-   }
+   require_once("conexion.php");
+   echo "entro ese careculo";
+    function insertarcotizacion($fecha,$documento,$serial,$cantidad,$precio){
+   	  $conexionbase= new conexion();
+   	  $conexionbase->constructor("localhost","root","123456","panaderia");
+      $conexionbase->conectar();
+   	  $conexionbase->insertarcotizacion($fecha,$documento,$serial,$cantidad,$precio);
+      echo "salio ese careculo";
+   
+ }
 
    function recolectar(){
-   	$documento=$_POST['documento'];
-   	$serial=$_POST['serialp'];
-   	$cantidad=$_POST['cantidad'];
-   	$precio=$_POST['precio'];
+    $documento=$_POST['documento'];
+    $fecha=$_POST['fecha']; 
+    $serial=$_POST['serial'];
+    $cantidad=$_POST['cantidad'];
+    $precio=$_POST['precio'];
+    insertarcotizacion($fecha,$documento,$serial,$cantidad,$precio);
+    }
 
-
-    guardar($documento, $seri, $cant, $pre)
-   
-   
-}
+    recolectar();
 
  ?>
